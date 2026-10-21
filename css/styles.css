@@ -1,0 +1,88 @@
+:root {
+  --purple: #552583;
+  --gold: #fdb927;
+  --black: #05020a;
+  --white: #f7f5f0;
+  --muted: #b9adc9;
+  --font: 'Figtree', system-ui, sans-serif;
+  --pixel: 'Press Start 2P', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* Top bar */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  z-index: 20;
+}
+.wordmark { font-weight: 700; font-size: 1.05rem; }
+.wordmark span { color: var(--muted); font-weight: 400; margin-left: 6px; }
+.resume-btn {
+  background: var(--white);
+  color: var(--black);
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 999px;
+}
+.resume-btn:hover { background: var(--gold); }
+
+/* Chapter list (left edge, roman numerals like the reference) */
+.chapters {
+  position: fixed;
+  left: 24px;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+  width: 200px;
+}
+.chapters a {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.chapters a span {
+  font-family: var(--pixel);
+  font-size: 0.55rem;
+  color: var(--gold);
+  align-self: center;
+}
+.chapters a:hover { color: var(--gold); }
+
+/* Sections */
+section { min-height: 100vh; position: relative; }
+.projects, .experience { padding: 120px 24px 80px 260px; }
+.section-title {
+  font-weight: 900;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 48px;
+}
+.section-title span {
+  font-family: var(--pixel);
+  font-size: 0.9rem;
+  color: var(--gold);
+  vertical-align: middle;
+  margin-right: 12px;
+}

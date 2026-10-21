@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rehman Iqbal</title>
+  <meta name="description" content="Rehman Iqbal: AI student at UC San Diego, builder, hooper.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <a class="wordmark" href="#home">Rehman Iqbal <span>Portfolio '26</span></a>
+    <a class="resume-btn" id="resume" href="assets/RehmanIqbal_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+  </header>
+
+  <nav class="chapters" aria-label="Sections">
+    <a href="#home">Home<span>I</span></a>
+    <a href="#projects">Projects<span>II</span></a>
+    <a href="#experience">Experience<span>III</span></a>
+    <a href="assets/RehmanIqbal_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume<span>IV</span></a>
+  </nav>
+
+  <main>
+    <section id="home" class="cover"></section>
+
+    <section id="projects" class="projects">
+      <h2 class="section-title"><span>II</span> Projects</h2>
+      <div class="shelf" id="shelf"></div>
+    </section>
+
+    <section id="experience" class="experience">
+      <h2 class="section-title"><span>III</span> Experience</h2>
+      <ol class="levels" id="levels"></ol>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
