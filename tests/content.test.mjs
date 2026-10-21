@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { projects, sportsProjects, career, connect, projectLink } from '../js/content.js';
+import { projects, sportsProjects, career, connect, work, projectLink } from '../js/content.js';
 
 test('projectLink prefers the deployed URL', () => {
   assert.equal(projectLink({ deployedUrl: 'https://a.app', githubUrl: 'https://github.com/x' }), 'https://a.app');
@@ -27,5 +27,10 @@ test('most recent workplace comes first in the career list', () => {
 
 test('connect lists Instagram, LinkedIn and GitHub in that order', () => {
   assert.deepEqual(connect.map((c) => c.label), ['Instagram', 'LinkedIn', 'GitHub']);
+  assert.equal(connect[0].url, 'https://www.instagram.com/iqbalrehman_/');
   assert.equal(connect[2].url, 'https://github.com/rehmaniq248');
+});
+
+test('the work page points at the family business site', () => {
+  assert.equal(work.url, 'https://chaseusa.com/');
 });

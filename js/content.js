@@ -11,7 +11,7 @@ export const resumeUrl = 'assets/RehmanIqbal_Resume.pdf';
 
 // Links with url: null are hidden until filled in.
 export const connect = [
-  { label: 'Instagram', url: null },
+  { label: 'Instagram', url: 'https://www.instagram.com/iqbalrehman_/' },
   { label: 'LinkedIn', url: 'https://www.linkedin.com/in/rehman-iqbal-90348137b/' },
   { label: 'GitHub', url: 'https://github.com/rehmaniq248' },
 ];
@@ -21,6 +21,7 @@ export const connect = [
 export const career = [
   {
     company: 'Chase USA International Inc.',
+    logo: 'assets/logos/chase.png',
     roles: [{ year: '2026', title: 'Artificial Intelligence Intern', now: true }],
   },
   {
@@ -63,10 +64,12 @@ export const sportsProjects = [
   },
 ];
 
-// The Work page shows this site in a frame. Fill in the URL to turn it on.
+// The Work page shows a scrollable screenshot of this site (it can't be embedded:
+// the site blocks framing), linking to the live site.
 export const work = {
-  company: 'Family business',
-  url: null,
+  company: 'Chase USA International',
+  url: 'https://chaseusa.com/',
+  image: 'assets/projects/chaseusa.jpg',
 };
 
 export function projectLink(project) {

@@ -36,7 +36,7 @@ a { color: inherit; text-decoration: none; }
 
 /* Top bar: just the resume button, top right */
 .topbar {
-  position: fixed;
+  position: absolute; /* sits at the top of the page and scrolls away with it */
   top: 0; left: 0; right: 0;
   display: flex;
   justify-content: flex-end;
@@ -54,26 +54,23 @@ a { color: inherit; text-decoration: none; }
 }
 .resume-btn:hover { background: var(--gold); }
 
-/* Bottom dock: avatar + page links, current page marked with a dot (after the reference pill nav) */
+/* Top nav: avatar + page links, blended into the background (no pill),
+   current page marked with a dot (after the reference nav) */
 .dock {
-  position: fixed;
+  position: absolute; /* part of the page, so content never slides under it */
   left: 50%;
-  bottom: 24px;
+  top: 14px;
   transform: translateX(-50%);
   z-index: 30;
   display: flex;
   align-items: center;
   gap: 34px;
-  padding: 8px 32px 8px 8px;
-  background: #000;
-  border: 1px solid #2e2e33;
-  border-radius: 999px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   font-family: var(--mono);
+  text-shadow: 0 1px 12px rgba(5, 2, 10, 0.6); /* stays legible over the moving glow */
 }
 .dock__avatar {
-  width: 54px;
-  height: 54px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   overflow: hidden;
   background: #2a2a2e;
@@ -92,16 +89,16 @@ a { color: inherit; text-decoration: none; }
   content: '';
   position: absolute;
   left: 50%;
-  bottom: -12px;
-  width: 9px;
-  height: 9px;
-  margin-left: -4.5px;
+  bottom: -11px;
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
   border-radius: 50%;
   background: var(--gold);
 }
 
 /* Pages */
-.page { min-height: 100vh; padding: 110px 24px 150px; max-width: 1180px; margin: 0 auto; }
+.page { min-height: 100vh; padding: 110px 24px 80px; max-width: 1180px; margin: 0 auto; }
 .page--home { padding: 0; max-width: none; }
 .section-title {
   font-weight: 900;
@@ -130,7 +127,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 90px 24px 140px;
+  padding: 90px 24px 90px;
   position: relative;
 }
 .iq-logo {
@@ -182,7 +179,7 @@ a { color: inherit; text-decoration: none; }
 }
 .scroll-hint {
   position: absolute;
-  bottom: 104px;
+  bottom: 36px;
   font-size: 1.6rem;
   color: var(--muted);
 }
@@ -192,7 +189,7 @@ a { color: inherit; text-decoration: none; }
 .about {
   max-width: 760px;
   margin: 0 auto;
-  padding: 40px 24px 170px;
+  padding: 40px 24px 110px;
   font-family: var(--mono);
 }
 .label { font-size: 1.15rem; font-weight: 400; color: var(--dim); margin: 0 0 22px; }
@@ -264,7 +261,8 @@ a { color: inherit; text-decoration: none; }
 }
 .work-frame__bar i { width: 11px; height: 11px; border-radius: 50%; background: #3a3442; }
 .work-frame__bar span { margin-left: 10px; }
-.work-frame iframe { display: block; width: 100%; height: 70vh; border: 0; background: #fff; }
+.work-frame__view { display: block; height: 70vh; overflow-y: auto; background: #fff; }
+.work-frame__view img { display: block; width: 100%; height: auto; }
 .work-frame__empty {
   display: grid;
   place-items: center;
@@ -358,11 +356,14 @@ a.backboard:hover { transform: translateY(-6px); }
 
 /* Phones */
 @media (max-width: 640px) {
-  .dock { gap: 16px; padding: 6px 18px 6px 6px; bottom: 16px; }
-  .dock__avatar { width: 40px; height: 40px; }
+  /* nav on the left, resume on the right, both in one row */
+  .topbar { padding: 16px; }
+  .resume-btn { padding: 6px 12px; font-size: 0.85rem; }
+  .dock { left: 16px; top: 22px; transform: none; gap: 16px; }
+  .dock__avatar { display: none; }
   .dock__link { font-size: 0.9rem; }
-  .dock__link[aria-current="page"]::after { bottom: -9px; width: 7px; height: 7px; margin-left: -3.5px; }
-  .page { padding: 90px 16px 130px; }
+  .page { padding: 90px 16px 60px; }
+  .role { font-size: 0.68rem; letter-spacing: 0.12em; }
   .connect { font-size: 1.1rem; margin-bottom: 64px; }
   .connect__sep { margin: 0 8px; }
   .career__company { font-size: 1.1rem; gap: 14px; }
@@ -370,6 +371,6 @@ a.backboard:hover { transform: translateY(-6px); }
   .career__role::before { width: 20px; }
 }
 @media (max-width: 360px) {
-  .dock { gap: 12px; }
-  .dock__link { font-size: 0.82rem; }
+  .dock { gap: 11px; }
+  .dock__link { font-size: 0.8rem; }
 }

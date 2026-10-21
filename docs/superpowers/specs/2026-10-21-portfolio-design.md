@@ -33,6 +33,8 @@ A personal portfolio for Rehman Iqbal, a UCSD Artificial Intelligence student. I
 
 > **Iteration 3 (Rehman):** the one-page scroll is now **four pages**: Home, Projects, Sports, Work, switched with a floating bottom **dock** (after his pill-nav reference: avatar, page names in monospace, a dot under the current page, gold instead of blue). **Home:** a new **IQ logo** (the Q is a basketball) above his name in **glowing cursive** (Yellowtail, write-on reveal then a neon pulse), with role and bio centered. Scrolling down shows **Connect** (Instagram, LinkedIn, GitHub) and **Career** (company, year, title, "Now"), styled after his second reference. The portrait and chapter list are removed from the cover. **Sports** holds the basketball project. **Work** frames a portion of his parents' company website (URL pending). The sections below describe earlier iterations.
 
+> **Iteration 4 (Rehman):** the nav moves to the **top** and blends into the background (no pill, no border), sitting at the top of each page. Instagram is https://www.instagram.com/iqbalrehman_/. The Work site is **https://chaseusa.com/**. It blocks framing (`X-Frame-Options: DENY`), so the Work page shows a scrollable screenshot of its homepage in a browser frame, linking to the live site. The Chase icon is used in Career.
+
 ### 1. Cover (layout "A", chosen)
 
 Modeled on the Shopify Editions "Renaissance" reference (`docs/references/cover-reference.png`):

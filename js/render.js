@@ -49,6 +49,16 @@ export function careerHTML(entry) {
     </li>`;
 }
 
+export function workHTML(work) {
+  if (!work.url) return '<div class="work-frame__empty">INSERT COIN · SITE LOADING SOON</div>';
+  const url = escapeHTML(work.url);
+  return `
+    <div class="work-frame__bar"><i></i><i></i><i></i><span>${url.replace(/^https?:\/\//, '')}</span></div>
+    <a class="work-frame__view" href="${url}" target="_blank" rel="noopener noreferrer">
+      <img src="${escapeHTML(work.image)}" alt="${escapeHTML(work.company)} website" loading="lazy">
+    </a>`;
+}
+
 export function backboardHTML(project) {
   const link = projectLink(project);
   const classes = ['backboard'];

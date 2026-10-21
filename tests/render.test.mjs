@@ -1,6 +1,17 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { backboardHTML, navHTML, connectHTML, careerHTML } from '../js/render.js';
+import { backboardHTML, navHTML, connectHTML, careerHTML, workHTML } from '../js/render.js';
+
+test('the work frame shows the site screenshot and links to the live site in a new tab', () => {
+  const html = workHTML({ company: 'Chase USA International', url: 'https://chaseusa.com/', image: 'assets/projects/chaseusa.jpg' });
+  assert.match(html, /href="https:\/\/chaseusa\.com\/" target="_blank"/);
+  assert.match(html, /<img[^>]+src="assets\/projects\/chaseusa\.jpg"/);
+  assert.match(html, /alt="Chase USA International website"/);
+});
+
+test('the work frame shows a placeholder until a site is set', () => {
+  assert.match(workHTML({ company: 'x', url: null }), /INSERT COIN/);
+});
 import { projects, sportsProjects } from '../js/content.js';
 
 test('a GitHub-only project renders as a link to its repo in a new tab', () => {
