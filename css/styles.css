@@ -142,3 +142,75 @@ section { min-height: 100vh; position: relative; }
   vertical-align: middle;
   margin-right: 12px;
 }
+
+/* Projects: 90s game cartridges on a shelf */
+.shelf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 32px;
+}
+.cartridge {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  padding: 0 18px 18px;
+  background: #141118;
+  border: 3px solid #000;
+  border-radius: 14px 14px 6px 6px;
+  box-shadow: 0 10px 0 #000, 0 18px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s;
+}
+a.cartridge:hover { transform: translateY(-8px); }
+.cartridge__ridges {
+  height: 26px;
+  margin: 0 -18px 14px;
+  border-radius: 11px 11px 0 0;
+  background: repeating-linear-gradient(90deg, #0b090d 0 6px, #1d1922 6px 12px);
+}
+.cartridge__label {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid var(--gold);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.cartridge__art {
+  height: 110px;
+  display: grid;
+  place-items: center;
+  font-size: 3.5rem;
+  background: radial-gradient(circle at 30% 30%, #7a3fb5, var(--purple) 60%, #2a1145);
+}
+.cartridge__title {
+  background: var(--gold);
+  color: var(--black);
+  font-weight: 900;
+  font-size: 1.1rem;
+  line-height: 1.1;
+  padding: 8px 10px;
+}
+.cartridge__stack {
+  font-family: var(--pixel);
+  font-size: 0.5rem;
+  line-height: 1.6;
+  color: var(--gold);
+  background: var(--black);
+  padding: 8px 10px;
+}
+.cartridge__desc { margin-top: 14px; font-size: 0.95rem; color: var(--muted); flex: 1; }
+.cartridge__cta {
+  margin-top: 14px;
+  font-family: var(--pixel);
+  font-size: 0.55rem;
+  color: var(--white);
+}
+.cartridge--featured {
+  width: 320px;
+  background: #2a1d05;
+  border-color: var(--gold);
+}
+.cartridge--featured .cartridge__art { height: 150px; }
+.cartridge--locked .cartridge__cta { color: var(--gold); }
+.cartridge__stack:empty { display: none; }
