@@ -1,7 +1,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cartridgeHTML } from '../js/render.js';
-import { projects } from '../js/content.js';
+import { cartridgeHTML, levelHTML } from '../js/render.js';
+import { projects, experience } from '../js/content.js';
+
+test('an experience entry renders as a numbered level with its role and highlights', () => {
+  const html = levelHTML(experience[0], 2);
+  assert.match(html, /LEVEL 2/);
+  assert.match(html, /Artificial Intelligence Intern/);
+  assert.match(html, /\+27%/);
+});
 
 test('a GitHub-only project renders as a link to its repo in a new tab', () => {
   const html = cartridgeHTML(projects[0]);
