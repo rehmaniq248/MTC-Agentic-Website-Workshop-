@@ -57,7 +57,13 @@ Modeled on the Shopify Editions "Renaissance" reference (`docs/references/cover-
 
 The MTC site also uses the **Space Grotesk** font. Not adopted, since Rehman asked for Canva Sans. A subtle scanline overlay for the arcade feel is optional and must not muddy the grain.
 
-### 2. Projects (layout "A", chosen: game cartridges)
+### 2. Projects
+
+**Update (Rehman, iteration 2):** cartridges replaced by **basketball backboards**, all equal size: white glass board, the project's frontend screenshot in the orange shooter's square, rim and net underneath, description below. GrantMatcher links to its live site (https://diamond-hacks-hackathon-non-profit.vercel.app) and uses a screenshot of it. RAG Study Buddy is a CLI, so its image is the real terminal output from its README.
+
+**Cover update (iteration 2):** header wordmark removed; name, a gold role line ("Artificial Intelligence · UC San Diego") and the bio stack in the left column directly above the chapter list.
+
+*Original (superseded):* game cartridges
 
 Each project is an arcade **game cartridge** on a shelf. Clicking a cartridge "inserts" it (short animation) and then opens the link in a new tab.
 

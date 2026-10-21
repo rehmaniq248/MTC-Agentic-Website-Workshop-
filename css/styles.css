@@ -36,14 +36,14 @@ a { color: inherit; text-decoration: none; }
   position: fixed;
   top: 0; left: 0; right: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 18px 24px;
   z-index: 20;
+  pointer-events: none; /* only the button is clickable, not the empty bar */
 }
-.wordmark { font-weight: 700; font-size: 1.05rem; }
-.wordmark span { color: var(--muted); font-weight: 400; margin-left: 6px; }
 .resume-btn {
+  pointer-events: auto;
   background: var(--white);
   color: var(--black);
   font-weight: 700;
@@ -79,7 +79,8 @@ a { color: inherit; text-decoration: none; }
 .chapters a:hover { color: var(--gold); }
 
 /* Cover: poster layout after the Shopify Editions reference.
-   Giant name sits over the portrait, bottom-left. */
+   Name, role and bio stack in the left column, right above the chapter list;
+   the name runs over the portrait. */
 .cover { overflow: hidden; }
 .portrait {
   position: absolute;
@@ -91,25 +92,36 @@ a { color: inherit; text-decoration: none; }
   object-position: bottom right;
   z-index: 1;
 }
-.giant-name {
+.intro {
   position: absolute;
-  left: 260px;
-  bottom: 6vh;
+  left: 24px;
+  bottom: 160px; /* clears the fixed chapter list below it */
   z-index: 2;
+  max-width: min(720px, 60vw);
+}
+.giant-name {
   font-weight: 900;
-  font-size: clamp(3rem, min(15vw, 24vh), 15rem);
+  font-size: clamp(3rem, min(14vw, 20vh), 14rem);
   line-height: 0.86;
   letter-spacing: -0.055em;
   color: var(--white);
 }
+.role {
+  margin-top: 34px; /* clears the descender of the q in Iqbal */
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
 .bio {
-  position: absolute;
-  left: 264px;
-  top: 22vh;
-  max-width: 400px;
-  z-index: 2;
-  font-size: 1.1rem;
-  color: var(--white);
+  margin-top: 10px;
+  max-width: 34rem;
+  padding-left: 14px;
+  border-left: 3px solid var(--gold);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(247, 245, 240, 0.88);
 }
 .ball {
   position: absolute;
@@ -143,77 +155,83 @@ section { min-height: 100vh; position: relative; }
   margin-right: 12px;
 }
 
-/* Projects: 90s game cartridges on a shelf */
+/* Projects: each project is a basketball backboard. The screenshot sits in the
+   orange shooter's square; rim and net hang underneath. All boards are equal size. */
 .shelf {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 40px 32px;
+  max-width: 1120px;
 }
-.cartridge {
-  position: relative;
+.backboard {
   display: flex;
   flex-direction: column;
-  width: 280px;
-  padding: 0 18px 18px;
-  background: #141118;
-  border: 3px solid #000;
-  border-radius: 14px 14px 6px 6px;
-  box-shadow: 0 10px 0 #000, 0 18px 30px rgba(0, 0, 0, 0.5);
   transition: transform 0.15s;
 }
-a.cartridge:hover { transform: translateY(-8px); }
-.cartridge__ridges {
-  height: 26px;
-  margin: 0 -18px 14px;
-  border-radius: 11px 11px 0 0;
-  background: repeating-linear-gradient(90deg, #0b090d 0 6px, #1d1922 6px 12px);
-}
-.cartridge__label {
+a.backboard:hover { transform: translateY(-6px); }
+.backboard__board {
   display: flex;
   flex-direction: column;
-  border: 3px solid var(--gold);
+  padding: 16px 16px 14px;
+  background: rgba(247, 245, 240, 0.07);
+  border: 5px solid var(--white);
   border-radius: 6px;
-  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
 }
-.cartridge__art {
-  height: 110px;
+.backboard__square {
+  aspect-ratio: 16 / 10;
+  border: 4px solid #e8772e;
+  border-radius: 2px;
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 30%, #7a3fb5, var(--purple) 60%, #2a1145);
   display: grid;
   place-items: center;
-  font-size: 3.5rem;
-  background: radial-gradient(circle at 30% 30%, #7a3fb5, var(--purple) 60%, #2a1145);
+  font-size: 4rem;
 }
-.cartridge__title {
-  background: var(--gold);
-  color: var(--black);
+.backboard__square img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+.backboard__title {
+  margin-top: 14px;
+  min-height: 2.3em; /* two lines, so every board lines up */
   font-weight: 900;
-  font-size: 1.1rem;
-  line-height: 1.1;
-  padding: 8px 10px;
+  font-size: 1.2rem;
+  line-height: 1.15;
 }
-.cartridge__stack {
+.backboard__stack {
+  margin-top: 6px;
+  min-height: 1.6em;
   font-family: var(--pixel);
   font-size: 0.5rem;
   line-height: 1.6;
   color: var(--gold);
-  background: var(--black);
-  padding: 8px 10px;
 }
-.cartridge__desc { margin-top: 14px; font-size: 0.95rem; color: var(--muted); flex: 1; }
-.cartridge__cta {
+.backboard__rim {
+  align-self: center;
+  width: 46%;
+  height: 10px;
+  margin-top: -2px;
+  background: #e8772e;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 4px 0 #a34d14;
+}
+.backboard__net {
+  align-self: center;
+  width: 40%;
+  height: 42px;
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 18% 100%);
+  background:
+    repeating-linear-gradient(60deg, transparent 0 9px, rgba(247, 245, 240, 0.75) 9px 11px),
+    repeating-linear-gradient(-60deg, transparent 0 9px, rgba(247, 245, 240, 0.75) 9px 11px);
+}
+.backboard__desc { margin-top: 14px; font-size: 0.95rem; color: var(--muted); flex: 1; }
+.backboard__cta {
   margin-top: 14px;
   font-family: var(--pixel);
   font-size: 0.55rem;
   color: var(--white);
 }
-.cartridge--featured {
-  width: 320px;
-  background: #2a1d05;
-  border-color: var(--gold);
-}
-.cartridge--featured .cartridge__art { height: 150px; }
-.cartridge--locked .cartridge__cta { color: var(--gold); }
-.cartridge__stack:empty { display: none; }
+.backboard--featured .backboard__board { border-color: var(--gold); }
+.backboard--locked .backboard__cta { color: var(--gold); }
 
 /* Experience: roles as arcade levels, most recent (highest) first */
 .education {
@@ -241,10 +259,9 @@ a.cartridge:hover { transform: translateY(-8px); }
 .level__highlights li { margin: 4px 0; }
 .level__highlights li::marker { content: '▸  '; color: var(--gold); }
 
-/* Phones and small tablets */
-@media (max-width: 768px) {
-  .topbar { padding: 14px 16px; background: rgba(5, 2, 10, 0.6); backdrop-filter: blur(8px); }
-  .wordmark span { display: none; }
+/* Phones, small tablets and landscape phones: chapter list becomes a top bar. */
+@media (max-width: 768px), (max-height: 500px) {
+  .topbar { padding: 14px 16px; background: rgba(5, 2, 10, 0.6); backdrop-filter: blur(8px); pointer-events: auto; }
 
   .chapters {
     top: 62px;
@@ -260,26 +277,32 @@ a.cartridge:hover { transform: translateY(-8px); }
   }
   .chapters a { font-size: 0.95rem; gap: 6px; }
 
-  .portrait { right: 50%; transform: translateX(50%); height: 58vh; max-width: 90vw; }
-  .giant-name { left: 16px; bottom: 5vh; font-size: clamp(3rem, min(19vw, 22vh), 7rem); }
-  .bio { left: 16px; right: 16px; top: 130px; max-width: none; font-size: 1rem; }
+  .intro { left: 16px; right: 16px; bottom: 4vh; max-width: none; }
+  .bio { font-size: 0.95rem; }
   .ball { right: 16px; bottom: 4vh; }
   .ball svg { width: 56px; height: 56px; }
 
   .projects, .experience { padding: 140px 16px 64px; }
-  .shelf { justify-content: center; }
-  .cartridge, .cartridge--featured { width: 100%; max-width: 340px; }
   .level { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
 }
 
-/* Keep jump targets (e.g. the ball → basketball cartridge) clear of the fixed bars. */
-[id] { scroll-margin-top: 96px; }
-@media (max-width: 768px) { [id] { scroll-margin-top: 116px; } }
+/* Phone portrait: portrait on top, intro underneath. */
+@media (max-width: 768px) {
+  .portrait { top: 112px; bottom: auto; right: 50%; transform: translateX(50%); height: 42vh; max-width: 90vw; }
+  .giant-name { font-size: clamp(3rem, min(19vw, 9vh), 7rem); }
+  .role { margin-top: 22px; font-size: 0.7rem; }
+  .ball { top: 124px; bottom: auto; }
+}
 
-/* Short screens (landscape phones, small laptops): lift the bio so the name never covers it. */
-@media (max-height: 700px) {
-  .bio { top: 84px; font-size: 0.95rem; max-width: 460px; }
+/* Landscape phones: portrait on the right, intro on the left. */
+@media (max-height: 500px) and (min-width: 569px) {
+  .portrait { top: 104px; right: 16px; transform: none; height: calc(100vh - 104px); max-width: 40vw; }
+  .ball { top: auto; bottom: 4vh; }
+  .intro { right: auto; max-width: 56vw; }
+  .giant-name { font-size: min(9vw, 17vh); }
+  .role { margin-top: 10px; }
 }
-@media (max-width: 768px) and (max-height: 700px) {
-  .bio { top: 112px; }
-}
+
+/* Keep jump targets (e.g. the ball → basketball backboard) clear of the fixed bars. */
+[id] { scroll-margin-top: 96px; }
+@media (max-width: 768px), (max-height: 500px) { [id] { scroll-margin-top: 116px; } }

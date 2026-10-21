@@ -7,25 +7,30 @@ export function escapeHTML(s) {
   return String(s).replace(/[&<>"']/g, (ch) => ESCAPES[ch]);
 }
 
-export function cartridgeHTML(project) {
+export function backboardHTML(project) {
   const link = projectLink(project);
-  const classes = ['cartridge'];
-  if (project.featured) classes.push('cartridge--featured');
-  if (!link) classes.push('cartridge--locked');
+  const classes = ['backboard'];
+  if (project.featured) classes.push('backboard--featured');
+  if (!link) classes.push('backboard--locked');
+
+  const square = project.image
+    ? `<img src="${escapeHTML(project.image)}" alt="${escapeHTML(project.title)} screenshot" loading="lazy">`
+    : '🏀';
 
   const inner = `
-    <span class="cartridge__ridges" aria-hidden="true"></span>
-    <span class="cartridge__label">
-      <span class="cartridge__art">${project.featured ? '🏀' : ''}</span>
-      <span class="cartridge__title">${escapeHTML(project.title)}</span>
-      <span class="cartridge__stack">${escapeHTML(project.stack.join(' · '))}</span>
+    <span class="backboard__board">
+      <span class="backboard__square">${square}</span>
+      <span class="backboard__title">${escapeHTML(project.title)}</span>
+      <span class="backboard__stack">${escapeHTML(project.stack.join(' · '))}</span>
     </span>
-    <span class="cartridge__desc">${escapeHTML(project.description)}</span>
-    <span class="cartridge__cta">${link ? 'Press to play ▶' : 'COMING SOON'}</span>`;
+    <span class="backboard__rim" aria-hidden="true"></span>
+    <span class="backboard__net" aria-hidden="true"></span>
+    <span class="backboard__desc">${escapeHTML(project.description)}</span>
+    <span class="backboard__cta">${link ? 'Take the shot ▶' : 'COMING SOON'}</span>`;
 
   const id = `project-${escapeHTML(project.id)}`;
   if (!link) {
-    return `<div class="${classes.join(' ')}" id="${id}" aria-disabled="true">${inner}</div>`;
+    return `<div class="${classes.join(' ')}" id="${id}">${inner}</div>`;
   }
   return `<a class="${classes.join(' ')}" id="${id}" href="${escapeHTML(link)}" target="_blank" rel="noopener noreferrer">${inner}</a>`;
 }

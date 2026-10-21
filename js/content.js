@@ -3,6 +3,8 @@
 export const bio =
   "AI student at UC San Diego. I build and ship real products with Claude, from e-commerce storefronts to RAG systems, and teach other students to do the same. Off the keyboard, I'm on the court.";
 
+export const role = 'Artificial Intelligence · UC San Diego';
+
 export const education = 'UC San Diego · B.S. Artificial Intelligence · Expected Spring 2028';
 
 export const resumeUrl = 'assets/RehmanIqbal_Resume.pdf';
@@ -16,6 +18,7 @@ export const projects = [
     description:
       'End-to-end RAG system with offline embeddings, semantic search and cross-encoder reranking. 187 automated tests, about $0.0013 per question.',
     githubUrl: 'https://github.com/rehmaniq248/RAG-Interview-Prep-Study-Buddy',
+    image: 'assets/projects/rag-study-buddy.jpg',
   },
   {
     id: 'grantmatcher',
@@ -24,6 +27,8 @@ export const projects = [
     description:
       'Built in under 24 hours at DiamondHacks: matches nonprofits to grants that fit their mission and drafts outreach emails.',
     githubUrl: 'https://github.com/rehmaniq248/DiamondHacksHackathonNonProfitMatcher',
+    deployedUrl: 'https://diamond-hacks-hackathon-non-profit.vercel.app',
+    image: 'assets/projects/grantmatcher.jpg',
   },
   {
     id: 'basketball',
