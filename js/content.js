@@ -1,13 +1,34 @@
 // All site copy lives here. Edit this file to change what the page says.
 
-export const bio =
-  "AI student at UC San Diego. I build and ship real products with Claude, from e-commerce storefronts to RAG systems, and teach other students to do the same. Off the keyboard, I'm on the court.";
+export const nickname = 'IQ';
 
 export const role = 'Artificial Intelligence · UC San Diego';
 
-export const education = 'UC San Diego · B.S. Artificial Intelligence · Expected Spring 2028';
+export const bio =
+  "AI student at UC San Diego. I build and ship real products with Claude, from e-commerce storefronts to RAG systems, and teach other students to do the same. Off the keyboard, I'm on the court.";
 
 export const resumeUrl = 'assets/RehmanIqbal_Resume.pdf';
+
+// Links with url: null are hidden until filled in.
+export const connect = [
+  { label: 'Instagram', url: null },
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/rehman-iqbal-90348137b/' },
+  { label: 'GitHub', url: 'https://github.com/rehmaniq248' },
+];
+
+// Most recent first. A role with now: true gets the "Now" marker.
+// Without a logo, the company's initial is shown instead.
+export const career = [
+  {
+    company: 'Chase USA International Inc.',
+    roles: [{ year: '2026', title: 'Artificial Intelligence Intern', now: true }],
+  },
+  {
+    company: 'Muslim Tech Collaborative',
+    logo: 'assets/logos/mtc.png',
+    roles: [{ year: '2026', title: 'Education Committee', now: true }],
+  },
+];
 
 // deployedUrl wins over githubUrl when both exist (see projectLink).
 export const projects = [
@@ -30,6 +51,9 @@ export const projects = [
     deployedUrl: 'https://diamond-hacks-hackathon-non-profit.vercel.app',
     image: 'assets/projects/grantmatcher.jpg',
   },
+];
+
+export const sportsProjects = [
   {
     id: 'basketball',
     title: 'Basketball Project',
@@ -39,30 +63,11 @@ export const projects = [
   },
 ];
 
-export const experience = [
-  {
-    company: 'Chase USA International Inc.',
-    role: 'Artificial Intelligence Intern',
-    dates: 'Jun 2026 – Present',
-    location: 'San Ysidro, CA',
-    highlights: [
-      'Shipped a Shopify storefront: 12 custom theme sections across 10+ production releases',
-      'Redesign drove +27% website traffic and +35% orders',
-      'Python pipeline migrated 115+ products from WooCommerce to Shopify',
-      'QR code trade-show tags boosted floor efficiency by 20%',
-    ],
-  },
-  {
-    company: 'Muslim Tech Collaborative',
-    role: 'Education Committee',
-    dates: 'Jun 2026 – Present',
-    location: 'San Diego, CA',
-    highlights: [
-      'Designed and open-sourced a Claude Code workshop for UCSD students',
-      'Built custom MCP servers, Claude skills and agents to power it',
-    ],
-  },
-];
+// The Work page shows this site in a frame. Fill in the URL to turn it on.
+export const work = {
+  company: 'Family business',
+  url: null,
+};
 
 export function projectLink(project) {
   return project.deployedUrl || project.githubUrl || null;

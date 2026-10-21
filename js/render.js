@@ -7,6 +7,48 @@ export function escapeHTML(s) {
   return String(s).replace(/[&<>"']/g, (ch) => ESCAPES[ch]);
 }
 
+const PAGES = [
+  { id: 'home', label: 'Home', href: 'index.html' },
+  { id: 'projects', label: 'Projects', href: 'projects.html' },
+  { id: 'sports', label: 'Sports', href: 'sports.html' },
+  { id: 'work', label: 'Work', href: 'work.html' },
+];
+
+export function navHTML(active) {
+  const links = PAGES.map(
+    (p) => `<a class="dock__link" href="${p.href}"${p.id === active ? ' aria-current="page"' : ''}>${p.label}</a>`
+  ).join('');
+  return `<a class="dock__avatar" href="index.html" aria-label="Home"><img src="assets/portrait.png" alt=""></a>${links}`;
+}
+
+export function connectHTML(links) {
+  return links
+    .filter((l) => l.url)
+    .map((l) => `<a href="${escapeHTML(l.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(l.label)}</a>`)
+    .join('<span class="connect__sep" aria-hidden="true">·</span>');
+}
+
+export function careerHTML(entry) {
+  const logo = entry.logo
+    ? `<img class="career__logo" src="${escapeHTML(entry.logo)}" alt="">`
+    : `<span class="career__logo career__logo--initial" aria-hidden="true">${escapeHTML(entry.company[0])}</span>`;
+  const roles = entry.roles
+    .map(
+      (r) => `
+      <li class="career__role">
+        <span class="career__year">${escapeHTML(r.year)}</span>
+        <span class="career__title">${escapeHTML(r.title)}</span>
+        ${r.now ? '<span class="career__now">Now</span>' : ''}
+      </li>`
+    )
+    .join('');
+  return `
+    <li class="career__entry">
+      <div class="career__company">${logo}<span>${escapeHTML(entry.company)}</span></div>
+      <ul class="career__roles">${roles}</ul>
+    </li>`;
+}
+
 export function backboardHTML(project) {
   const link = projectLink(project);
   const classes = ['backboard'];
@@ -33,17 +75,4 @@ export function backboardHTML(project) {
     return `<div class="${classes.join(' ')}" id="${id}">${inner}</div>`;
   }
   return `<a class="${classes.join(' ')}" id="${id}" href="${escapeHTML(link)}" target="_blank" rel="noopener noreferrer">${inner}</a>`;
-}
-
-export function levelHTML(item, levelNumber) {
-  const highlights = item.highlights.map((h) => `<li>${escapeHTML(h)}</li>`).join('');
-  return `
-    <li class="level">
-      <span class="level__number">LEVEL ${levelNumber}</span>
-      <div class="level__body">
-        <h3 class="level__company">${escapeHTML(item.company)}</h3>
-        <p class="level__meta">${escapeHTML(item.role)} · ${escapeHTML(item.dates)} · ${escapeHTML(item.location)}</p>
-        <ul class="level__highlights">${highlights}</ul>
-      </div>
-    </li>`;
 }

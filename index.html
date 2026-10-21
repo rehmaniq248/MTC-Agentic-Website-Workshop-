@@ -4,54 +4,51 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rehman Iqbal</title>
-  <meta name="description" content="Rehman Iqbal: AI student at UC San Diego, builder, hooper.">
+  <meta name="description" content="Rehman Iqbal (IQ): AI student at UC San Diego, builder, hooper.">
+  <link rel="icon" href="assets/iq-logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&family=Yellowtail&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body data-page="home">
   <canvas id="bg" aria-hidden="true"></canvas>
 
   <header class="topbar">
-    <a class="resume-btn" id="resume" href="assets/RehmanIqbal_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+    <a class="resume-btn" href="assets/RehmanIqbal_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
   </header>
 
-  <nav class="chapters" aria-label="Sections">
-    <a href="#home">Home<span>I</span></a>
-    <a href="#projects">Projects<span>II</span></a>
-    <a href="#experience">Experience<span>III</span></a>
-    <a href="assets/RehmanIqbal_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume<span>IV</span></a>
-  </nav>
-
-  <main>
-    <section id="home" class="cover">
-      <img class="portrait" id="portrait" src="assets/portrait.png" alt="Cartoon portrait of Rehman Iqbal">
-      <div class="intro">
-        <h1 class="giant-name">Rehman<br>Iqbal</h1>
-        <p class="role" id="role"></p>
-        <p class="bio" id="bio"></p>
-      </div>
-      <a class="ball" id="ball" href="#project-basketball" aria-label="Shoot to the basketball project">
-        <svg viewBox="0 0 100 100" aria-hidden="true">
-          <circle cx="50" cy="50" r="46" fill="#e8772e" stroke="#1a0b05" stroke-width="4"/>
-          <path d="M4 50 H96 M50 4 V96 M18 18 C40 38 40 62 18 82 M82 18 C60 38 60 62 82 82" fill="none" stroke="#1a0b05" stroke-width="4"/>
-        </svg>
-        <span>Shoot</span>
-      </a>
+  <main class="page page--home">
+    <section class="hero">
+      <svg class="iq-logo" viewBox="0 0 200 140" role="img" aria-label="IQ">
+        <g fill="#fdb927">
+          <rect x="8" y="14" width="50" height="14" rx="4"/>
+          <rect x="20" y="22" width="26" height="96" rx="5"/>
+          <rect x="8" y="112" width="50" height="14" rx="4"/>
+        </g>
+        <defs><clipPath id="ball"><circle cx="122" cy="70" r="41"/></clipPath></defs>
+        <circle cx="122" cy="70" r="46" fill="#552583" stroke="#fdb927" stroke-width="10"/>
+        <g clip-path="url(#ball)" fill="none" stroke="#fdb927" stroke-width="4">
+          <path d="M122 24 V116 M76 70 H168 M92 36 C110 54 110 86 92 104 M152 36 C134 54 134 86 152 104"/>
+        </g>
+        <path d="M128 98 C142 116 160 126 190 124" fill="none" stroke="#fdb927" stroke-width="12" stroke-linecap="round"/>
+      </svg>
+      <h1 class="script-name">Rehman Iqbal</h1>
+      <p class="role" id="role"></p>
+      <p class="bio" id="bio"></p>
+      <a class="scroll-hint" href="#about" aria-label="Scroll to Connect and Career">▾</a>
     </section>
 
-    <section id="projects" class="projects">
-      <h2 class="section-title"><span>II</span> Projects</h2>
-      <div class="shelf" id="shelf"></div>
-    </section>
+    <section class="about" id="about">
+      <h2 class="label">Connect</h2>
+      <p class="connect" id="connect"></p>
 
-    <section id="experience" class="experience">
-      <h2 class="section-title"><span>III</span> Experience</h2>
-      <p class="education" id="education"></p>
-      <ol class="levels" id="levels"></ol>
+      <h2 class="label">Career</h2>
+      <ul class="career" id="career"></ul>
     </section>
   </main>
+
+  <nav class="dock" id="dock" aria-label="Pages"></nav>
 
   <script type="module" src="js/main.js"></script>
 </body>

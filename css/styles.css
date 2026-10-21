@@ -4,8 +4,11 @@
   --black: #05020a;
   --white: #f7f5f0;
   --muted: #b9adc9;
+  --dim: #8a8494;
   --font: 'Figtree', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
   --pixel: 'Press Start 2P', monospace;
+  --script: 'Yellowtail', cursive;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,16 +34,15 @@ a { color: inherit; text-decoration: none; }
   display: block;
 }
 
-/* Top bar */
+/* Top bar: just the resume button, top right */
 .topbar {
   position: fixed;
   top: 0; left: 0; right: 0;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
   padding: 18px 24px;
   z-index: 20;
-  pointer-events: none; /* only the button is clickable, not the empty bar */
+  pointer-events: none;
 }
 .resume-btn {
   pointer-events: auto;
@@ -52,100 +54,61 @@ a { color: inherit; text-decoration: none; }
 }
 .resume-btn:hover { background: var(--gold); }
 
-/* Chapter list (left edge, roman numerals like the reference) */
-.chapters {
+/* Bottom dock: avatar + page links, current page marked with a dot (after the reference pill nav) */
+.dock {
   position: fixed;
-  left: 24px;
-  bottom: 40px;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 30;
   display: flex;
-  flex-direction: column;
-  z-index: 20;
-  width: 200px;
-}
-.chapters a {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 700;
-  font-size: 1.35rem;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-}
-.chapters a span {
-  font-family: var(--pixel);
-  font-size: 0.55rem;
-  color: var(--gold);
-  align-self: center;
-}
-.chapters a:hover { color: var(--gold); }
-
-/* Cover: poster layout after the Shopify Editions reference.
-   Name, role and bio stack in the left column, right above the chapter list;
-   the name runs over the portrait. */
-.cover { overflow: hidden; }
-.portrait {
-  position: absolute;
-  right: 3vw;
-  bottom: 0;
-  height: 94vh;
-  max-width: 60vw;
-  object-fit: contain;
-  object-position: bottom right;
-  z-index: 1;
-}
-.intro {
-  position: absolute;
-  left: 24px;
-  bottom: 160px; /* clears the fixed chapter list below it */
-  z-index: 2;
-  max-width: min(720px, 60vw);
-}
-.giant-name {
-  font-weight: 900;
-  font-size: clamp(3rem, min(14vw, 20vh), 14rem);
-  line-height: 0.86;
-  letter-spacing: -0.055em;
-  color: var(--white);
-}
-.role {
-  margin-top: 34px; /* clears the descender of the q in Iqbal */
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-.bio {
-  margin-top: 10px;
-  max-width: 34rem;
-  padding-left: 14px;
-  border-left: 3px solid var(--gold);
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: rgba(247, 245, 240, 0.88);
-}
-.ball {
-  position: absolute;
-  right: 6vw;
-  bottom: 8vh;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 34px;
+  padding: 8px 32px 8px 8px;
+  background: #000;
+  border: 1px solid #2e2e33;
+  border-radius: 999px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  font-family: var(--mono);
 }
-.ball svg { width: 72px; height: 72px; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5)); }
-.ball span { font-family: var(--pixel); font-size: 0.55rem; color: var(--gold); }
-.ball:hover svg { transform: scale(1.08); }
+.dock__avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #2a2a2e;
+  flex: none;
+}
+.dock__avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.dock__link {
+  position: relative;
+  font-size: 1.2rem;
+  color: var(--dim);
+  transition: color 0.15s;
+}
+.dock__link:hover { color: var(--white); }
+.dock__link[aria-current="page"] { color: var(--white); }
+.dock__link[aria-current="page"]::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  width: 9px;
+  height: 9px;
+  margin-left: -4.5px;
+  border-radius: 50%;
+  background: var(--gold);
+}
 
-/* Sections */
-section { min-height: 100vh; position: relative; }
-.projects, .experience { padding: 120px 24px 80px 260px; }
+/* Pages */
+.page { min-height: 100vh; padding: 110px 24px 150px; max-width: 1180px; margin: 0 auto; }
+.page--home { padding: 0; max-width: none; }
 .section-title {
   font-weight: 900;
   font-size: clamp(2.5rem, 7vw, 6rem);
   letter-spacing: -0.04em;
   line-height: 1;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
 }
 .section-title span {
   font-family: var(--pixel);
@@ -154,12 +117,171 @@ section { min-height: 100vh; position: relative; }
   vertical-align: middle;
   margin-right: 12px;
 }
+.page-lede { color: var(--muted); font-size: 1.1rem; margin-bottom: 48px; }
+.page-lede a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+.shelf { margin-top: 48px; }
+.page-lede + .shelf { margin-top: 0; }
+
+/* Home hero: IQ logo over a glowing cursive name, centered */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 90px 24px 140px;
+  position: relative;
+}
+.iq-logo {
+  width: clamp(110px, 14vw, 170px);
+  height: auto;
+  filter: drop-shadow(0 0 14px rgba(253, 185, 39, 0.45));
+  margin-bottom: 8px;
+}
+.script-name {
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(3.6rem, 11vw, 9.5rem);
+  line-height: 1.15;
+  padding: 0 0.15em; /* room for the script's swashes */
+  color: #fff6dc;
+  text-shadow:
+    0 0 6px #fff1c4,
+    0 0 18px var(--gold),
+    0 0 42px var(--gold),
+    0 0 80px var(--purple);
+  /* write-on reveal, then a slow neon pulse */
+  clip-path: inset(-40% 100% -40% -10%);
+  animation: write-on 2.4s cubic-bezier(0.6, 0.05, 0.3, 1) 0.2s forwards, neon 3.2s ease-in-out 2.6s infinite;
+}
+@keyframes write-on { to { clip-path: inset(-40% -10% -40% -10%); } }
+@keyframes neon {
+  0%, 100% { text-shadow: 0 0 6px #fff1c4, 0 0 18px var(--gold), 0 0 42px var(--gold), 0 0 80px var(--purple); }
+  50% { text-shadow: 0 0 4px #fff1c4, 0 0 10px var(--gold), 0 0 24px var(--gold), 0 0 48px var(--purple); }
+  52% { opacity: 0.85; }
+  54% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .script-name { animation: none; clip-path: none; }
+}
+.role {
+  margin-top: 18px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.bio {
+  margin-top: 12px;
+  max-width: 36rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(247, 245, 240, 0.85);
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 104px;
+  font-size: 1.6rem;
+  color: var(--muted);
+}
+.scroll-hint:hover { color: var(--gold); }
+
+/* Home: Connect + Career, monospace list after the reference */
+.about {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 24px 170px;
+  font-family: var(--mono);
+}
+.label { font-size: 1.15rem; font-weight: 400; color: var(--dim); margin: 0 0 22px; }
+.connect { font-size: 1.4rem; margin-bottom: 84px; }
+.connect a:hover { color: var(--gold); }
+.connect__sep { color: var(--dim); margin: 0 14px; }
+.career { list-style: none; display: flex; flex-direction: column; gap: 26px; }
+.career__company { display: flex; align-items: center; gap: 22px; font-size: 1.4rem; }
+.career__logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  object-fit: contain;
+  background: #fff;
+  flex: none;
+}
+.career__logo--initial {
+  display: grid;
+  place-items: center;
+  background: var(--purple);
+  color: var(--gold);
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+.career__roles { list-style: none; margin: 12px 0 0 16px; }
+.career__role {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+  padding-left: 40px;
+  font-size: 1.15rem;
+  color: var(--muted);
+}
+/* tree elbow connecting the role to its company */
+.career__role::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -8px;
+  width: 26px;
+  height: 20px;
+  border-left: 1.5px solid #5a5466;
+  border-bottom: 1.5px solid #5a5466;
+  border-bottom-left-radius: 4px;
+}
+.career__year { color: var(--dim); }
+.career__title { color: #d9d3e2; }
+.career__now { color: var(--gold); white-space: nowrap; }
+.career__now::before { content: '●'; margin-right: 10px; font-size: 0.8em; }
+
+/* Work: the family-business site in a browser-style frame */
+.work-frame {
+  border: 2px solid #2e2e33;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0b0910;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+.work-frame__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #18141f;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--dim);
+}
+.work-frame__bar i { width: 11px; height: 11px; border-radius: 50%; background: #3a3442; }
+.work-frame__bar span { margin-left: 10px; }
+.work-frame iframe { display: block; width: 100%; height: 70vh; border: 0; background: #fff; }
+.work-frame__empty {
+  display: grid;
+  place-items: center;
+  height: 50vh;
+  font-family: var(--pixel);
+  font-size: 0.75rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-align: center;
+  padding: 24px;
+}
 
 /* Projects: each project is a basketball backboard. The screenshot sits in the
    orange shooter's square; rim and net hang underneath. All boards are equal size. */
 .shelf {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   gap: 40px 32px;
   max-width: 1120px;
 }
@@ -233,76 +355,21 @@ a.backboard:hover { transform: translateY(-6px); }
 .backboard--featured .backboard__board { border-color: var(--gold); }
 .backboard--locked .backboard__cta { color: var(--gold); }
 
-/* Experience: roles as arcade levels, most recent (highest) first */
-.education {
-  font-family: var(--pixel);
-  font-size: 0.6rem;
-  line-height: 1.8;
-  color: var(--gold);
-  margin: -24px 0 40px;
+
+/* Phones */
+@media (max-width: 640px) {
+  .dock { gap: 16px; padding: 6px 18px 6px 6px; bottom: 16px; }
+  .dock__avatar { width: 40px; height: 40px; }
+  .dock__link { font-size: 0.9rem; }
+  .dock__link[aria-current="page"]::after { bottom: -9px; width: 7px; height: 7px; margin-left: -3.5px; }
+  .page { padding: 90px 16px 130px; }
+  .connect { font-size: 1.1rem; margin-bottom: 64px; }
+  .connect__sep { margin: 0 8px; }
+  .career__company { font-size: 1.1rem; gap: 14px; }
+  .career__role { font-size: 0.95rem; gap: 14px; padding-left: 32px; flex-wrap: wrap; row-gap: 2px; }
+  .career__role::before { width: 20px; }
 }
-.levels { list-style: none; display: flex; flex-direction: column; gap: 28px; max-width: 900px; }
-.level {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 24px;
-  padding: 24px;
-  background: rgba(5, 2, 10, 0.55);
-  border: 2px solid rgba(253, 185, 39, 0.35);
-  border-left: 6px solid var(--gold);
-  border-radius: 8px;
+@media (max-width: 360px) {
+  .dock { gap: 12px; }
+  .dock__link { font-size: 0.82rem; }
 }
-.level__number { font-family: var(--pixel); font-size: 0.75rem; color: var(--gold); padding-top: 6px; }
-.level__company { font-weight: 900; font-size: 1.6rem; letter-spacing: -0.02em; line-height: 1.15; }
-.level__meta { color: var(--muted); margin: 4px 0 12px; }
-.level__highlights { padding-left: 18px; }
-.level__highlights li { margin: 4px 0; }
-.level__highlights li::marker { content: '▸  '; color: var(--gold); }
-
-/* Phones, small tablets and landscape phones: chapter list becomes a top bar. */
-@media (max-width: 768px), (max-height: 500px) {
-  .topbar { padding: 14px 16px; background: rgba(5, 2, 10, 0.6); backdrop-filter: blur(8px); pointer-events: auto; }
-
-  .chapters {
-    top: 62px;
-    bottom: auto;
-    left: 0;
-    right: 0;
-    width: auto;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 8px 16px;
-    background: rgba(5, 2, 10, 0.6);
-    backdrop-filter: blur(8px);
-  }
-  .chapters a { font-size: 0.95rem; gap: 6px; }
-
-  .intro { left: 16px; right: 16px; bottom: 4vh; max-width: none; }
-  .bio { font-size: 0.95rem; }
-  .ball { right: 16px; bottom: 4vh; }
-  .ball svg { width: 56px; height: 56px; }
-
-  .projects, .experience { padding: 140px 16px 64px; }
-  .level { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
-}
-
-/* Phone portrait: portrait on top, intro underneath. */
-@media (max-width: 768px) {
-  .portrait { top: 112px; bottom: auto; right: 50%; transform: translateX(50%); height: 42vh; max-width: 90vw; }
-  .giant-name { font-size: clamp(3rem, min(19vw, 9vh), 7rem); }
-  .role { margin-top: 22px; font-size: 0.7rem; }
-  .ball { top: 124px; bottom: auto; }
-}
-
-/* Landscape phones: portrait on the right, intro on the left. */
-@media (max-height: 500px) and (min-width: 569px) {
-  .portrait { top: 104px; right: 16px; transform: none; height: calc(100vh - 104px); max-width: 40vw; }
-  .ball { top: auto; bottom: 4vh; }
-  .intro { right: auto; max-width: 56vw; }
-  .giant-name { font-size: min(9vw, 17vh); }
-  .role { margin-top: 10px; }
-}
-
-/* Keep jump targets (e.g. the ball → basketball backboard) clear of the fixed bars. */
-[id] { scroll-margin-top: 96px; }
-@media (max-width: 768px), (max-height: 500px) { [id] { scroll-margin-top: 116px; } }

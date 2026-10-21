@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" role="img" aria-label="IQ">
+        <g fill="#fdb927">
+          <rect x="8" y="14" width="50" height="14" rx="4"/>
+          <rect x="20" y="22" width="26" height="96" rx="5"/>
+          <rect x="8" y="112" width="50" height="14" rx="4"/>
+        </g>
+        <defs><clipPath id="ball"><circle cx="122" cy="70" r="41"/></clipPath></defs>
+        <circle cx="122" cy="70" r="46" fill="#552583" stroke="#fdb927" stroke-width="10"/>
+        <g clip-path="url(#ball)" fill="none" stroke="#fdb927" stroke-width="4">
+          <path d="M122 24 V116 M76 70 H168 M92 36 C110 54 110 86 92 104 M152 36 C134 54 134 86 152 104"/>
+        </g>
+        <path d="M128 98 C142 116 160 126 190 124" fill="none" stroke="#fdb927" stroke-width="12" stroke-linecap="round"/>
+      </svg>
