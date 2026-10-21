@@ -240,3 +240,34 @@ a.cartridge:hover { transform: translateY(-8px); }
 .level__highlights { padding-left: 18px; }
 .level__highlights li { margin: 4px 0; }
 .level__highlights li::marker { content: '▸  '; color: var(--gold); }
+
+/* Phones and small tablets */
+@media (max-width: 768px) {
+  .topbar { padding: 14px 16px; background: rgba(5, 2, 10, 0.6); backdrop-filter: blur(8px); }
+  .wordmark span { display: none; }
+
+  .chapters {
+    top: 62px;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background: rgba(5, 2, 10, 0.6);
+    backdrop-filter: blur(8px);
+  }
+  .chapters a { font-size: 0.95rem; gap: 6px; }
+
+  .portrait { right: 50%; transform: translateX(50%); height: 58vh; max-width: 90vw; }
+  .giant-name { left: 16px; bottom: 5vh; font-size: clamp(3.5rem, 19vw, 7rem); }
+  .bio { left: 16px; right: 16px; top: 130px; max-width: none; font-size: 1rem; }
+  .ball { right: 16px; bottom: 4vh; }
+  .ball svg { width: 56px; height: 56px; }
+
+  .projects, .experience { padding: 140px 16px 64px; }
+  .shelf { justify-content: center; }
+  .cartridge, .cartridge--featured { width: 100%; max-width: 340px; }
+  .level { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
+}
