@@ -5,7 +5,7 @@ A 90s-arcade, Lakers-colored personal portfolio, built live with Claude Code for
 ## Run it locally
 
 ```bash
-npm start      # serves on http://localhost:8000 (python3 -m http.server)
+npm start      # serves on http://localhost:8000 with caching off
 npm test       # unit tests (node --test, no dependencies)
 ```
 
